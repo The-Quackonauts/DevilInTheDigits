@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dspnsa86pmph3"]
+
+[ext_resource type="PackedScene" uid="uid://cps8blo54se7n" path="res://scenes/segment.tscn" id="1_stoj7"]
+[ext_resource type="Script" uid="uid://bsxd1m1iosndq" path="res://scripts/digit_display.gd" id="2_display"]
+
+[node name="8" type="Node2D" unique_id=1485345119]
+script = ExtResource("2_display")
+
+[node name="A" parent="." unique_id=1452414413 instance=ExtResource("1_stoj7")]
+position = Vector2(0, -200)
+
+[node name="B" parent="." unique_id=189589355 instance=ExtResource("1_stoj7")]
+position = Vector2(100, -100)
+rotation = 1.5707964
+
+[node name="C" parent="." unique_id=872846727 instance=ExtResource("1_stoj7")]
+position = Vector2(100, 100)
+rotation = 1.5707964
+
+[node name="D" parent="." unique_id=228694011 instance=ExtResource("1_stoj7")]
+position = Vector2(0, 200)
+
+[node name="E" parent="." unique_id=1021870474 instance=ExtResource("1_stoj7")]
+position = Vector2(-100, 100)
+rotation = 1.5707964
+
+[node name="F" parent="." unique_id=1350479305 instance=ExtResource("1_stoj7")]
+position = Vector2(-100, -100)
+rotation = 1.5707964
+
+[node name="G" parent="." unique_id=290463920 instance=ExtResource("1_stoj7")]

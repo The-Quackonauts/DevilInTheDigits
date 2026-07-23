@@ -1,12 +1,28 @@
 [gd_scene format=3 uid="uid://da2aunjglhnad"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5368"]
+[ext_resource type="Script" uid="uid://pcgx0kf8cocf" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dspnsa86pmph3" path="res://scenes/numbers/8.tscn" id="2_display"]
+[ext_resource type="PackedScene" uid="uid://cps8blo54se7n" path="res://scenes/segment.tscn" id="3_lnu2h"]
 
-[node name="Node2D" type="Node2D" unique_id=217747827]
+[sub_resource type="FontVariation" id="FontVariation_n5368"]
 
-[node name="Floor" type="Area2D" parent="." unique_id=61899999]
-position = Vector2(-1, 0)
-scale = Vector2(99.18, 10.05)
+[node name="Game" type="Node2D" unique_id=217747827]
+script = ExtResource("1_yqjtg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=287211463]
-shape = SubResource("RectangleShape2D_n5368")
+[node name="8" parent="." unique_id=1665530512 instance=ExtResource("2_display")]
+position = Vector2(576, 340)
+rotation_follow_speed = 1.5
+
+[node name="dot" parent="8" unique_id=1452414413 instance=ExtResource("3_lnu2h")]
+position = Vector2(161, 199)
+scale = Vector2(0.185, 1)
+
+[node name="DigitTimer" type="Timer" parent="." unique_id=502599205]
+
+[node name="CountdownLabel" type="Label" parent="." unique_id=1039629955]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 95.0
+offset_bottom = 43.0
+theme_override_fonts/font = SubResource("FontVariation_n5368")
+text = "Loading..."
