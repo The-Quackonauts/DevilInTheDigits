@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 			Input.get_joy_axis(joypads[0], JOY_AXIS_RIGHT_Y)
 		)
 		if stick.length() >= controller_deadzone:
-			_smooth_rotation_toward(stick.angle() + PI / 2.0, delta)
+			_smooth_rotation_toward(stick.angle() - PI / 2.0, delta)
 
 
 func _input(event: InputEvent) -> void:
