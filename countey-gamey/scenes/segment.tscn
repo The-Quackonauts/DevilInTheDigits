@@ -4,6 +4,7 @@
 size = Vector2(180, 36)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=1452414413]
+sync_to_physics = false
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1988811655]
 offset_left = -90.0

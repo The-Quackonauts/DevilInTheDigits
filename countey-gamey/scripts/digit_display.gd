@@ -32,7 +32,7 @@ func _ready() -> void:
 	_update_segments()
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if dragging:
 		var mouse_angle := (get_global_mouse_position() - global_position).angle()
 		_smooth_rotation_toward(mouse_angle + mouse_rotation_offset, delta)
