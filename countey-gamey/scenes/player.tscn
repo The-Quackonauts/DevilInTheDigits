@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://656pbfu7soq6" path="res://scripts/player_movement.gd" id="1_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtmb3"]
-size = Vector2(128, 128)
+size = Vector2(44.5, 44.5)
 
 [node name="Player" type="CharacterBody2D" unique_id=1324370792]
 collision_layer = 2
@@ -12,9 +12,9 @@ floor_snap_length = 10.0
 script = ExtResource("1_g2els")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=475343240]
-position = Vector2(-5.662441e-07, -3.5762787e-07)
+position = Vector2(0.49999952, -9.536743e-07)
+scale = Vector2(0.35156247, 0.34375)
 texture = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1707801339]
-visible = false
 shape = SubResource("RectangleShape2D_xtmb3")
