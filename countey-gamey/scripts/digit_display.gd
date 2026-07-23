@@ -40,12 +40,10 @@ func _physics_process(delta: float) -> void:
 
 	var joypads := Input.get_connected_joypads()
 	if not joypads.is_empty():
-		var stick := Vector2(
-			Input.get_joy_axis(joypads[0], JOY_AXIS_RIGHT_X),
-			Input.get_joy_axis(joypads[0], JOY_AXIS_RIGHT_Y)
-		)
-		if stick.length() >= controller_deadzone:
-			_smooth_rotation_toward(stick.angle() - PI / 2.0, delta)
+		var joypad: int = joypads[0]
+		var turn_input := Input.get_joy_axis(joypad, JOY_AXIS_RIGHT_X)
+		if absf(turn_input) >= controller_deadzone:
+			rotation = wrapf(rotation + signf(turn_input) * rotation_follow_speed * delta, -PI, PI)
 
 
 func _input(event: InputEvent) -> void:
@@ -57,10 +55,6 @@ func _input(event: InputEvent) -> void:
 
 
 func _smooth_rotation_toward(target_angle: float, delta: float) -> void:
-	var distance := absf(wrapf(target_angle - rotation, -PI, PI))
-	if is_equal_approx(distance, PI):
-		target_angle += 0.0001 if randf() < 0.5 else -0.0001
-
 	var weight := 1.0 - exp(-rotation_follow_speed * delta)
 	rotation = lerp_angle(rotation, target_angle, weight)
 

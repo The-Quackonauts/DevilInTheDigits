@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dspnsa86pmph3" path="res://scenes/numbers/8.tscn" id="2_display"]
 [ext_resource type="PackedScene" uid="uid://cps8blo54se7n" path="res://scenes/segment.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://rmq61e30kxq4" path="res://scenes/player.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" path="res://scenes/coin.tscn" id="5_coin"]
 
 [sub_resource type="FontVariation" id="FontVariation_n5368"]
 
@@ -18,6 +19,32 @@ rotation_follow_speed = 1.5
 position = Vector2(161, 199)
 scale = Vector2(0.185, 1)
 
+[node name="Coins" type="Node2D" parent="8" unique_id=1878747772]
+
+[node name="TopOutside" parent="8/Coins" unique_id=1729713770 instance=ExtResource("5_coin")]
+position = Vector2(0, -300)
+
+[node name="TopCenter" parent="8/Coins" unique_id=1684079173 instance=ExtResource("5_coin")]
+position = Vector2(0, -100)
+
+[node name="TopLeftOutside" parent="8/Coins" unique_id=531810619 instance=ExtResource("5_coin")]
+position = Vector2(-200, -100)
+
+[node name="TopRightOutside" parent="8/Coins" unique_id=1110433667 instance=ExtResource("5_coin")]
+position = Vector2(200, -100)
+
+[node name="BottomCenter" parent="8/Coins" unique_id=249152970 instance=ExtResource("5_coin")]
+position = Vector2(0, 100)
+
+[node name="BottomLeftOutside" parent="8/Coins" unique_id=1543489768 instance=ExtResource("5_coin")]
+position = Vector2(-200, 100)
+
+[node name="BottomRightOutside" parent="8/Coins" unique_id=2065145478 instance=ExtResource("5_coin")]
+position = Vector2(200, 100)
+
+[node name="BottomOutside" parent="8/Coins" unique_id=1218913697 instance=ExtResource("5_coin")]
+position = Vector2(0, 300)
+
 [node name="Player" parent="." unique_id=1324370792 instance=ExtResource("4_lbhrr")]
 position = Vector2(569, 213)
 
@@ -30,3 +57,22 @@ offset_right = 95.0
 offset_bottom = 43.0
 theme_override_fonts/font = SubResource("FontVariation_n5368")
 text = "Loading..."
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=833896748]
+
+[node name="CoinCounter" type="Label" parent="HUD" unique_id=166923427]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 52.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.84, 0.25, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
+text = "Coins: 0"
+horizontal_alignment = 2
