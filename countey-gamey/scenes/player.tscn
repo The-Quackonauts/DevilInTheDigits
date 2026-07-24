@@ -1,20 +1,128 @@
 [gd_scene format=3 uid="uid://rmq61e30kxq4"]
 
-[ext_resource type="Texture2D" uid="uid://1r1ktuyhnuyi" path="res://icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://656pbfu7soq6" path="res://scripts/player_movement.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://cq5iyprrkk2uf" path="res://assets/Gnome/Gnome_floating_V2.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://brn7vc46dofqv" path="res://assets/Gnome/Gnome_idle_256.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://b6rqcueeabe2i" path="res://assets/Gnome/Gnome_Run_V2_256.png" id="4_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtmb3"]
-size = Vector2(44.5, 44.5)
+size = Vector2(44, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("3_dqkch")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("3_dqkch")
+region = Rect2(128, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("3_dqkch")
+region = Rect2(256, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("3_dqkch")
+region = Rect2(384, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(128, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(256, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(384, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(512, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(640, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(768, 0, 128, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_15ldo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ls1")
+}],
+"loop": 1,
+"name": &"floating",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jej6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ej7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oprun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfm1y")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 25.0
+}]
 
 [node name="Player" type="CharacterBody2D" unique_id=1324370792]
 collision_layer = 2
 floor_snap_length = 10.0
 script = ExtResource("1_g2els")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=475343240]
-position = Vector2(0.49999952, -9.536743e-07)
-scale = Vector2(0.35156247, 0.34375)
-texture = ExtResource("1_3vyb7")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1707801339]
 shape = SubResource("RectangleShape2D_xtmb3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=726425680]
+position = Vector2(0, -28)
+scale = Vector2(0.40625003, 0.40625003)
+sprite_frames = SubResource("SpriteFrames_15ldo")
+animation = &"run"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.8241006
