@@ -12,21 +12,21 @@ const CAST := [
 	{
 		"name": "Devil",
 		"portraits": {
-			"neutral": PLACEHOLDER_PORTRAIT,
-			"smug": PLACEHOLDER_PORTRAIT,
-			"excited": PLACEHOLDER_PORTRAIT,
-			"panicked": PLACEHOLDER_PORTRAIT,
-			"defeated": PLACEHOLDER_PORTRAIT,
+			"neutral": preload("uid://cu0faa8xeuacq"),
+			"smug": preload("uid://cwybbnj8s6w87"),
+			"excited": preload("uid://brnd34as88dof"),
+			"panicked": preload("uid://qtc8rs4g8rwv"),
+			"defeated": preload("uid://bs101l7otrdwx"),
 		},
 	},
 	{
 		"name": "Duck",
 		"portraits": {
-			"neutral": PLACEHOLDER_PORTRAIT,
-			"sad": PLACEHOLDER_PORTRAIT,
-			"thinking": PLACEHOLDER_PORTRAIT,
-			"whispering": PLACEHOLDER_PORTRAIT,
-			"triumphant": PLACEHOLDER_PORTRAIT,
+			"neutral": preload("uid://7hu17c675q7s"),
+			"sad": preload("uid://1yjcakmpjj3y"),
+			"thinking": preload("uid://7m7lh3biuyh7"),
+			"whispering": preload("uid://batbynouyyf84"),
+			"triumphant": preload("uid://bdb8o6u55gjua"),
 		},
 	},
 ]
