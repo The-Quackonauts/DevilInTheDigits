@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		if floating == true:
 			sprite.play("floating")	
 		else:
-			sprite.play("idle")
+			sprite.play("run")
 	# move
 	if direction:
 		velocity.x = direction * SPEED
