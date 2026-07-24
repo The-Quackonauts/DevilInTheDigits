@@ -6,6 +6,7 @@ signal finished
 @export_range(1.0, 100.0, 1.0) var characters_per_second := 42.0
 @export_range(0.0, 1.0, 0.05) var inactive_brightness := 0.35
 @export_range(0.0, 1.0, 0.05) var fade_seconds := 0.2
+@export_range(0.0, 2.0, 0.05) var input_delay_seconds := 0.5
 
 @onready var portraits: Array[TextureRect] = [$Screen/LeftPortrait, $Screen/RightPortrait]
 @onready var speaker_label: Label = $Screen/TextBox/Speaker
@@ -19,6 +20,7 @@ var _shown_characters := 0.0
 var _typing := false
 var _playing := false
 var _was_paused := false
+var _accept_input_after := 0
 var _fade: Tween
 
 
@@ -32,6 +34,7 @@ func play(lines: Array, cast: Array) -> void:
 	_cast = cast
 	_line_index = -1
 	_playing = true
+	_accept_input_after = Time.get_ticks_msec() + int(input_delay_seconds * 1000.0)
 	_was_paused = get_tree().paused
 	get_tree().paused = true
 	show()
@@ -54,15 +57,10 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not _playing:
+	if not _playing or Time.get_ticks_msec() < _accept_input_after:
 		return
 
-	var clicked: bool = (
-		event is InputEventMouseButton
-		and event.button_index == MOUSE_BUTTON_LEFT
-		and event.pressed
-	)
-	if clicked or event.is_action_pressed("ui_accept"):
+	if event.is_pressed() and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		if _typing:
 			_finish_typing()
