@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ending.gd" id="1_ending"]
+[ext_resource type="PackedScene" path="res://scenes/cutscene.tscn" id="2_cutscene"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_end"]
+bg_color = Color(0.015, 0.01, 0.03, 1)
+
+[node name="Ending" type="Node"]
+script = ExtResource("1_ending")
+
+[node name="EndCard" type="CanvasLayer" parent="."]
+
+[node name="Background" type="Panel" parent="EndCard"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_end")
+
+[node name="Title" type="Label" parent="EndCard/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.82, 0.7, 0.95, 1)
+theme_override_font_sizes/font_size = 72
+text = "THE END"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cutscene" parent="." instance=ExtResource("2_cutscene")]

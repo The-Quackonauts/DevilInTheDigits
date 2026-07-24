@@ -14,7 +14,6 @@ const DIGIT_MASKS := [
 ]
 
 @export_range(0.1, 20.0, 0.1) var rotation_follow_speed := 6.0
-@export_range(0.0, 0.9, 0.05) var controller_deadzone := 0.2
 
 @onready var segments := [$A, $B, $C, $D, $E, $F, $G]
 
@@ -25,7 +24,6 @@ var current_digit := 9:
 			_update_segments()
 
 var dragging := false
-var mouse_rotation_offset := 0.0
 
 
 func _ready() -> void:
@@ -35,23 +33,16 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if dragging:
 		var mouse_angle := (get_global_mouse_position() - global_position).angle()
-		_smooth_rotation_toward(mouse_angle + mouse_rotation_offset, delta)
+		_smooth_rotation_toward(mouse_angle, delta)
 		return
 
-	var joypads := Input.get_connected_joypads()
-	if not joypads.is_empty():
-		var joypad: int = joypads[0]
-		var turn_input := Input.get_joy_axis(joypad, JOY_AXIS_RIGHT_X)
-		if absf(turn_input) >= controller_deadzone:
-			rotation = wrapf(rotation + signf(turn_input) * rotation_follow_speed * delta, -PI, PI)
+	var turn_input := Input.get_axis("rotate_left", "rotate_right")
+	rotation = wrapf(rotation + turn_input * rotation_follow_speed * delta, -PI, PI)
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		dragging = event.pressed
-		if dragging:
-			var mouse_angle := (get_global_mouse_position() - global_position).angle()
-			mouse_rotation_offset = rotation - mouse_angle
 
 
 func _smooth_rotation_toward(target_angle: float, delta: float) -> void:
