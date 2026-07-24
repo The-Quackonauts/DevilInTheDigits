@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://criaxy6dm3fo0"]
+
+[ext_resource type="Script" uid="uid://d2m16pj8it3yd" path="res://scripts/cutscene.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_text_box"]
+bg_color = Color(0.045, 0.035, 0.07, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.82, 0.7, 0.95, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="Cutscene" type="CanvasLayer" unique_id=2000195097]
+process_mode = 3
+layer = 100
+visible = false
+script = ExtResource("1_script")
+
+[node name="Screen" type="Control" parent="." unique_id=1809460040]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Dim" type="ColorRect" parent="Screen" unique_id=220739725]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.015, 0.01, 0.03, 0.88)
+
+[node name="LeftPortrait" type="TextureRect" parent="Screen" unique_id=1989522041]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.03
+anchor_right = 0.48
+anchor_bottom = 0.72
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightPortrait" type="TextureRect" parent="Screen" unique_id=1363827478]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.52
+anchor_top = 0.03
+anchor_right = 0.96
+anchor_bottom = 0.72
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="TextBox" type="Panel" parent="Screen" unique_id=458730003]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.67
+anchor_right = 0.96
+anchor_bottom = 0.96
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_text_box")
+
+[node name="Speaker" type="Label" parent="Screen/TextBox" unique_id=1345716503]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 14.0
+offset_right = -24.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.35, 1)
+theme_override_font_sizes/font_size = 26
+text = "Speaker"
+
+[node name="Dialogue" type="RichTextLabel" parent="Screen/TextBox" unique_id=129742154]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 57.0
+offset_right = -24.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "Dialogue"
+scroll_active = false
+
+[node name="Continue" type="Label" parent="Screen/TextBox" unique_id=2142505352]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -38.0
+offset_right = -24.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.82, 0.7, 0.95, 1)
+theme_override_font_sizes/font_size = 22
+text = "▼"
+horizontal_alignment = 2

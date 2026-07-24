@@ -10,9 +10,11 @@ var seconds_per_digit: float = 6.7
 @onready var coin_counter: Label = $HUD/CoinCounter
 
 var coins_collected := 0
+var total_coins := 0
 
 
 func _ready() -> void:
+	total_coins = coins.get_child_count()
 	for coin: Area2D in coins.get_children():
 		coin.body_entered.connect(_collect_coin.bind(coin))
 
@@ -35,3 +37,5 @@ func _collect_coin(_body: Node2D, coin: Area2D) -> void:
 	coin.queue_free()
 	coins_collected += 1
 	coin_counter.text = "Coins: %d" % coins_collected
+	if coins_collected == total_coins:
+		GameFlow.go_to(GameFlow.State.ENDING)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pcgx0kf8cocf" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dspnsa86pmph3" path="res://scenes/numbers/8.tscn" id="2_display"]
-[ext_resource type="PackedScene" uid="uid://cps8blo54se7n" path="res://scenes/segment.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cps8blo54se7n" path="res://scenes/numbers/segment.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://rmq61e30kxq4" path="res://scenes/player.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" path="res://scenes/coin.tscn" id="5_coin"]
 [ext_resource type="Script" uid="uid://uqaipt2l3y" path="res://scripts/KillZone.gd" id="5_iywne"]
