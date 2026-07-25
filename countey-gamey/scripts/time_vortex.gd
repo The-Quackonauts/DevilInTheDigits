@@ -1,40 +1,47 @@
 extends Node3D
 
-const FLIGHT_SECONDS := 14.0
 const SPEED := 260.0
+const FLUCTUATION_SECONDS := 0.5
+const FLUCTUATION_AMOUNT := 8.0
 const TUBE_RADIUS := 9.0
 const PATH_POINTS := 150
 const PATH_STEP := 28.0
 const TUBE_RINGS := 900
 const RING_SIDES := 20
 
-@export var background_mode := false
-
 @onready var camera: Camera3D = $Camera
 @onready var tunnel: MeshInstance3D = $Tunnel
-@onready var hud: CanvasLayer = $HUD
-@onready var flash: ColorRect = $HUD/Flash
+@onready var status: Label = $HUD/Status
 @onready var progress_bar: ProgressBar = $HUD/Progress
 
 var path := Curve3D.new()
 var distance := 0.0
 var elapsed := 0.0
+var fluctuation_elapsed := 0.0
+var velocity_offset := 0.0
+var displayed_velocity := 0.0
+var charge_tween: Tween
+var random := RandomNumberGenerator.new()
 
 
 func _ready() -> void:
 	_make_path()
 	_make_tunnel()
-	assert(path.get_baked_length() > SPEED * FLIGHT_SECONDS)
-	hud.visible = not background_mode
+	random.randomize()
 
 
 func _process(delta: float) -> void:
 	elapsed += delta
-	if background_mode:
-		distance = fmod(distance + SPEED * delta, path.get_baked_length() - 8.0)
-	else:
-		distance = minf(distance + SPEED * delta, path.get_baked_length() - 8.0)
-		progress_bar.value = elapsed / FLIGHT_SECONDS * 100.0
+	distance = fmod(distance + SPEED * delta, path.get_baked_length() - 8.0)
+	fluctuation_elapsed += delta
+	if fluctuation_elapsed >= FLUCTUATION_SECONDS:
+		fluctuation_elapsed = fmod(fluctuation_elapsed, FLUCTUATION_SECONDS)
+		velocity_offset = random.randf_range(-FLUCTUATION_AMOUNT, FLUCTUATION_AMOUNT)
+
+	var charge_ratio := progress_bar.value / progress_bar.max_value
+	var target_velocity := maxf(0.0, (SPEED + velocity_offset) * charge_ratio)
+	displayed_velocity = lerpf(displayed_velocity, target_velocity, 1.0 - exp(-8.0 * delta))
+	status.text = "TEMPORAL VELOCITY  //  %.1fc" % displayed_velocity
 
 	var position := path.sample_baked(distance)
 	var target := path.sample_baked(distance + 8.0)
@@ -46,10 +53,13 @@ func _process(delta: float) -> void:
 	camera.global_transform = flight_transform
 	camera.fov = 106.0 + sin(elapsed * 7.0) * 3.0
 
-	if not background_mode and elapsed >= FLIGHT_SECONDS - 1.2:
-		flash.color.a = smoothstep(FLIGHT_SECONDS - 1.2, FLIGHT_SECONDS, elapsed)
-	if not background_mode and elapsed >= FLIGHT_SECONDS:
-		GameFlow.go_to(GameFlow.State.ENDING)
+
+func charge_to(value: float, seconds := 0.25) -> Signal:
+	if charge_tween:
+		charge_tween.kill()
+	charge_tween = create_tween()
+	charge_tween.tween_property(progress_bar, "value", value, seconds).set_trans(Tween.TRANS_SINE)
+	return charge_tween.finished
 
 
 func _make_path() -> void:

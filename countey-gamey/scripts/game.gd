@@ -2,6 +2,8 @@ extends Node2D
 
 const PORTAL_SCENE := preload("res://scenes/portal.tscn")
 const PORTAL_POSITION := Vector2(720, 112)
+const COIN_CHARGE_MAX := 66.0
+const FINAL_CHARGE_SECONDS := 5.0
 
 @export_range(0.5, 60.0, 0.5)
 var seconds_per_digit: float = 6.7
@@ -10,8 +12,8 @@ var seconds_per_digit: float = 6.7
 @onready var coins: Node2D = $"8/Coins"
 @onready var digit_timer: Timer = $DigitTimer
 @onready var countdown_label: Label = $CountdownLabel
-@onready var coin_counter: Label = $HUD/CoinCounter
 @onready var pickup_sound: AudioStreamPlayer2D = $PickupSound
+@onready var time_vortex = $TimeVortex
 
 var coins_collected := 0
 var total_coins := 0
@@ -41,14 +43,17 @@ func _collect_coin(_body: Node2D, coin: Area2D) -> void:
 	coin.queue_free()
 	pickup_sound.play()
 	coins_collected += 1
-	coin_counter.text = "Coins: %d" % coins_collected
+	var charge_finished: Signal = time_vortex.charge_to(
+		float(coins_collected) / total_coins * COIN_CHARGE_MAX
+	)
 	if coins_collected == total_coins:
+		await charge_finished
+		await time_vortex.charge_to(100.0, FINAL_CHARGE_SECONDS)
 		var portal := PORTAL_SCENE.instantiate() as Area2D
 		portal.position = PORTAL_POSITION
 		portal.body_entered.connect(_enter_portal)
 		add_child.call_deferred(portal)
-		coin_counter.text = "Portal open!"
 
 
 func _enter_portal(_body: Node2D) -> void:
-	GameFlow.go_to(GameFlow.State.TIME_VORTEX)
+	GameFlow.go_to(GameFlow.State.ENDING)

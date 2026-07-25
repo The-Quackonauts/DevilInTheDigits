@@ -16,7 +16,6 @@
 
 [node name="Game" type="Node2D" unique_id=217747827]
 script = ExtResource("1_yqjtg")
-seconds_per_digit = null
 
 [node name="TimeVortex" parent="." unique_id=644419478 instance=ExtResource("8_vortex")]
 

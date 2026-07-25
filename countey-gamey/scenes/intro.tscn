@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://ckpawcx6sxtqh" path="res://scripts/intro.gd" id="1_intro"]
 [ext_resource type="PackedScene" uid="uid://criaxy6dm3fo0" path="res://scenes/cutscene.tscn" id="2_cutscene"]
+[ext_resource type="AudioStream" uid="uid://dxxfwhxnkjtel" path="res://assets/sfx/Level_Music.mp3" id="3_4bx60"]
 
 [node name="Intro" type="Node" unique_id=1965584353]
 script = ExtResource("1_intro")
 
 [node name="Cutscene" parent="." unique_id=248978872 instance=ExtResource("2_cutscene")]
+
+[node name="music" type="AudioStreamPlayer2D" parent="." unique_id=302678181]
+stream = ExtResource("3_4bx60")
+autoplay = true
+bus = &"Music"

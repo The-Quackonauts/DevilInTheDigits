@@ -1,12 +1,11 @@
 extends Node
 
-enum State { MAIN_MENU, INTRO, GAMEPLAY, TIME_VORTEX, ENDING }
+enum State { MAIN_MENU, INTRO, GAMEPLAY, ENDING }
 
 const SCENES := [
 	"res://scenes/main_menu.tscn",
 	"res://scenes/intro.tscn",
 	"res://scenes/game.tscn",
-	"res://scenes/time_vortex.tscn",
 	"res://scenes/ending.tscn",
 ]
 const PLACEHOLDER_PORTRAIT := preload("res://icon.svg")
@@ -34,9 +33,18 @@ const CAST := [
 ]
 
 var state := State.MAIN_MENU
+var _transition_pending := false
 
 
 func go_to(next_state: State) -> void:
+	if _transition_pending:
+		return
+	_transition_pending = true
+	call_deferred("_change_scene", next_state)
+
+
+func _change_scene(next_state: State) -> void:
 	state = next_state
 	var error := get_tree().change_scene_to_file(SCENES[state])
+	_transition_pending = false
 	assert(error == OK, "Could not load %s" % SCENES[state])

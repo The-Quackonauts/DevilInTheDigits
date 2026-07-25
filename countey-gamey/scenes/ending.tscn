@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://c878jyinci1p1"]
 
-[ext_resource type="Script" path="res://scripts/ending.gd" id="1_ending"]
-[ext_resource type="PackedScene" path="res://scenes/cutscene.tscn" id="2_cutscene"]
+[ext_resource type="Script" uid="uid://ixc8fgl0sx0f" path="res://scripts/ending.gd" id="1_ending"]
+[ext_resource type="PackedScene" uid="uid://criaxy6dm3fo0" path="res://scenes/cutscene.tscn" id="2_cutscene"]
+[ext_resource type="AudioStream" uid="uid://dxxfwhxnkjtel" path="res://assets/sfx/Level_Music.mp3" id="3_2x1jc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_end"]
 bg_color = Color(0.015, 0.01, 0.03, 1)
 
-[node name="Ending" type="Node"]
+[node name="Ending" type="Node" unique_id=1893101641]
 script = ExtResource("1_ending")
 
-[node name="EndCard" type="CanvasLayer" parent="."]
+[node name="EndCard" type="CanvasLayer" parent="." unique_id=1035904977]
 
-[node name="Background" type="Panel" parent="EndCard"]
+[node name="Background" type="Panel" parent="EndCard" unique_id=501393532]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBox_end")
 
-[node name="Title" type="Label" parent="EndCard/Background"]
+[node name="Title" type="Label" parent="EndCard/Background" unique_id=554081860]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +33,7 @@ text = "THE END"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackToMainMenu" type="Button" parent="EndCard/Background"]
+[node name="BackToMainMenu" type="Button" parent="EndCard/Background" unique_id=2064052584]
 custom_minimum_size = Vector2(280, 64)
 layout_mode = 1
 anchors_preset = 7
@@ -49,6 +50,11 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 24
 text = "BACK TO MAIN MENU"
 
-[node name="Cutscene" parent="." instance=ExtResource("2_cutscene")]
+[node name="Cutscene" parent="." unique_id=1362349171 instance=ExtResource("2_cutscene")]
+
+[node name="music" type="AudioStreamPlayer2D" parent="." unique_id=1819662196]
+stream = ExtResource("3_2x1jc")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="EndCard/Background/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]
