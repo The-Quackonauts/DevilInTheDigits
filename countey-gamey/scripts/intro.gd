@@ -3,7 +3,7 @@ extends Node
 const LINES := [
 	{
 		"speaker": 0,
-		"emotion": "smug",
+		"emotion": "neutral",
 		"text": "hello skibidy bro, i am the devil, disguised as a gnome. i shall grant you one wish, with no drawbacks trust me bro fr fr",
 	},
 	{
