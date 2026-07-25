@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" uid="uid://bevjyjo0igum6" path="res://assets/Backgorunds/portal.png" id="1_portal"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_portal"]
+radius = 46.0
+
+[node name="Portal" type="Area2D"]
+z_index = 10
+collision_layer = 0
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_portal")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_portal")

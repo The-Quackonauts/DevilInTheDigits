@@ -24,7 +24,14 @@ const LINES := [
 ]
 
 @onready var cutscene: Cutscene = $Cutscene
+@onready var main_menu_button: Button = $EndCard/Background/BackToMainMenu
 
 
 func _ready() -> void:
 	cutscene.play(LINES, GameFlow.CAST)
+	await cutscene.finished
+	main_menu_button.grab_focus()
+
+
+func _on_back_to_main_menu_pressed() -> void:
+	GameFlow.go_to(GameFlow.State.MAIN_MENU)

@@ -1,5 +1,8 @@
 extends Node2D
 
+const PORTAL_SCENE := preload("res://scenes/portal.tscn")
+const PORTAL_POSITION := Vector2(720, 112)
+
 @export_range(0.5, 60.0, 0.5)
 var seconds_per_digit: float = 6.7
 
@@ -40,4 +43,12 @@ func _collect_coin(_body: Node2D, coin: Area2D) -> void:
 	coins_collected += 1
 	coin_counter.text = "Coins: %d" % coins_collected
 	if coins_collected == total_coins:
-		GameFlow.go_to(GameFlow.State.ENDING)
+		var portal := PORTAL_SCENE.instantiate() as Area2D
+		portal.position = PORTAL_POSITION
+		portal.body_entered.connect(_enter_portal)
+		add_child.call_deferred(portal)
+		coin_counter.text = "Portal open!"
+
+
+func _enter_portal(_body: Node2D) -> void:
+	GameFlow.go_to(GameFlow.State.TIME_VORTEX)

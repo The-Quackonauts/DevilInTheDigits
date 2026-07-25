@@ -1,10 +1,12 @@
 extends Node
 
-enum State { INTRO, GAMEPLAY, ENDING }
+enum State { MAIN_MENU, INTRO, GAMEPLAY, TIME_VORTEX, ENDING }
 
 const SCENES := [
+	"res://scenes/main_menu.tscn",
 	"res://scenes/intro.tscn",
 	"res://scenes/game.tscn",
+	"res://scenes/time_vortex.tscn",
 	"res://scenes/ending.tscn",
 ]
 const PLACEHOLDER_PORTRAIT := preload("res://icon.svg")
@@ -31,7 +33,7 @@ const CAST := [
 	},
 ]
 
-var state := State.INTRO
+var state := State.MAIN_MENU
 
 
 func go_to(next_state: State) -> void:

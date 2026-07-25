@@ -1,0 +1,140 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/time_vortex.gd" id="1_vortex"]
+
+[sub_resource type="Shader" id="Shader_tunnel"]
+code = "shader_type spatial;
+render_mode unshaded, cull_disabled;
+
+void fragment() {
+	float ribs = pow(max(0.0, sin(UV.y * 720.0 + TIME * 72.0)), 18.0);
+	float spiral = pow(max(0.0, sin(UV.x * 75.0 + UV.y * 190.0 + TIME * 34.0)), 12.0);
+	float pulse = 0.55 + 0.45 * sin(UV.y * 90.0 + TIME * 22.0);
+	vec3 violet = vec3(0.24, 0.02, 0.65);
+	vec3 cyan = vec3(0.0, 0.85, 1.0);
+	vec3 color = violet * (0.18 + pulse * 0.2) + cyan * ribs * 2.8 + vec3(1.0, 0.12, 0.75) * spiral;
+	ALBEDO = color;
+	EMISSION = color * 2.2;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tunnel"]
+shader = SubResource("Shader_tunnel")
+
+[sub_resource type="StandardMaterial3D" id="ParticleMaterial"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.6, 0.9, 1, 0.9)
+emission_enabled = true
+emission = Color(0.25, 0.75, 1, 1)
+emission_energy_multiplier = 5.0
+cull_mode = 2
+
+[sub_resource type="BoxMesh" id="ParticleMesh"]
+material = SubResource("ParticleMaterial")
+size = Vector3(0.04, 0.04, 3.2)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcess"]
+emission_shape = 3
+emission_box_extents = Vector3(8, 8, 26)
+direction = Vector3(0, 0, 1)
+spread = 18.0
+initial_velocity_min = 58.0
+initial_velocity_max = 92.0
+scale_min = 0.45
+scale_max = 1.4
+color = Color(0.65, 0.88, 1, 0.9)
+
+[sub_resource type="Environment" id="Environment_vortex"]
+background_mode = 1
+background_color = Color(0.001, 0, 0.012, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.12, 0.04, 0.28, 1)
+ambient_light_energy = 0.6
+glow_enabled = true
+glow_intensity = 1.15
+glow_bloom = 0.35
+tonemap_mode = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_progress"]
+bg_color = Color(0.05, 0.12, 0.2, 0.75)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="Style_fill"]
+bg_color = Color(0.25, 0.9, 1, 0.9)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="TimeVortex" type="Node3D"]
+script = ExtResource("1_vortex")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vortex")
+
+[node name="Tunnel" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_tunnel")
+
+[node name="Camera" type="Camera3D" parent="."]
+current = true
+near = 0.05
+far = 180.0
+
+[node name="WarpParticles" type="GPUParticles3D" parent="Camera"]
+amount = 750
+lifetime = 0.72
+randomness = 0.55
+local_coords = true
+process_material = SubResource("ParticleProcess")
+draw_pass_1 = SubResource("ParticleMesh")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Status" type="Label" parent="HUD"]
+offset_left = 34.0
+offset_top = 28.0
+offset_right = 430.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(0.6, 0.94, 1, 0.82)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 20
+text = "TEMPORAL VELOCITY  //  260.0c"
+
+[node name="Progress" type="ProgressBar" parent="HUD"]
+offset_left = 36.0
+offset_top = 70.0
+offset_right = 310.0
+offset_bottom = 78.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("Style_progress")
+theme_override_styles/fill = SubResource("Style_fill")
+show_percentage = false
+
+[node name="Destination" type="Label" parent="HUD"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -360.0
+offset_top = 28.0
+offset_right = -34.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.82, 0.66, 1, 0.72)
+theme_override_font_sizes/font_size = 18
+text = "DESTINATION  //  UNKNOWN"
+horizontal_alignment = 2
+
+[node name="Flash" type="ColorRect" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.82, 0.94, 1, 0)

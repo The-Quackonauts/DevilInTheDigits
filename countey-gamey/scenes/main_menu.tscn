@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_background"]
+bg_color = Color(0.015, 0.01, 0.03, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_background")
+
+[node name="Center" type="CenterContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="Background/Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Title" type="Label" parent="Background/Center/Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.7, 0.95, 1)
+theme_override_font_sizes/font_size = 64
+text = "DEVIL IN THE DIGITS"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="Background/Center/Menu"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "PLAY"
+
+[node name="Credits" type="Label" parent="Background/Center/Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.7, 0.82, 1)
+theme_override_font_sizes/font_size = 20
+text = "Made by FreddyMSchubert & plaguemarine"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Background/Center/Menu/Play" to="." method="_on_play_pressed"]
