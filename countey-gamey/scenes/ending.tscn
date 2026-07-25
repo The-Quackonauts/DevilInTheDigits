@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ixc8fgl0sx0f" path="res://scripts/ending.gd" id="1_ending"]
 [ext_resource type="PackedScene" uid="uid://criaxy6dm3fo0" path="res://scenes/cutscene.tscn" id="2_cutscene"]
-[ext_resource type="AudioStream" uid="uid://dxxfwhxnkjtel" path="res://assets/sfx/Level_Music.mp3" id="3_2x1jc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_end"]
 bg_color = Color(0.015, 0.01, 0.03, 1)
@@ -51,10 +50,5 @@ theme_override_font_sizes/font_size = 24
 text = "BACK TO MAIN MENU"
 
 [node name="Cutscene" parent="." unique_id=1362349171 instance=ExtResource("2_cutscene")]
-
-[node name="music" type="AudioStreamPlayer2D" parent="." unique_id=1819662196]
-stream = ExtResource("3_2x1jc")
-autoplay = true
-bus = &"Music"
 
 [connection signal="pressed" from="EndCard/Background/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]
