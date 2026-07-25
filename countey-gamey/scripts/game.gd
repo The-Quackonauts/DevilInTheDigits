@@ -8,6 +8,7 @@ var seconds_per_digit: float = 6.7
 @onready var digit_timer: Timer = $DigitTimer
 @onready var countdown_label: Label = $CountdownLabel
 @onready var coin_counter: Label = $HUD/CoinCounter
+@onready var pickup_sound: AudioStreamPlayer2D = $PickupSound
 
 var coins_collected := 0
 var total_coins := 0
@@ -35,6 +36,7 @@ func _on_digit_timer_timeout() -> void:
 func _collect_coin(_body: Node2D, coin: Area2D) -> void:
 	coin.set_deferred("monitoring", false)
 	coin.queue_free()
+	pickup_sound.play()
 	coins_collected += 1
 	coin_counter.text = "Coins: %d" % coins_collected
 	if coins_collected == total_coins:
