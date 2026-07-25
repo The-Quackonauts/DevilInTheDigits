@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bahqlx3rcm16r"]
 
+[ext_resource type="Texture2D" uid="uid://b5ows7cxbwn38" path="res://assets/Backgorunds/Aura_Coin.png" id="1_rwqht"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_coin"]
 radius = 15.0
 
@@ -7,17 +9,10 @@ radius = 15.0
 collision_layer = 0
 collision_mask = 2
 
-[node name="Outer" type="Polygon2D" parent="." unique_id=1332187150]
-color = Color(1, 0.65, 0.08, 1)
-polygon = PackedVector2Array(15, 0, 13.8582, 5.74025, 10.6066, 10.6066, 5.74025, 13.8582, 0, 15, -5.74025, 13.8582, -10.6066, 10.6066, -13.8582, 5.74025, -15, 0, -13.8582, -5.74025, -10.6066, -10.6066, -5.74025, -13.8582, 0, -15, 5.74025, -13.8582, 10.6066, -10.6066, 13.8582, -5.74025)
-
-[node name="Inner" type="Polygon2D" parent="." unique_id=345531336]
-color = Color(1, 0.84, 0.25, 1)
-polygon = PackedVector2Array(9, 0, 8.31492, 3.44415, 6.36396, 6.36396, 3.44415, 8.31492, 0, 9, -3.44415, 8.31492, -6.36396, 6.36396, -8.31492, 3.44415, -9, 0, -8.31492, -3.44415, -6.36396, -6.36396, -3.44415, -8.31492, 0, -9, 3.44415, -8.31492, 6.36396, -6.36396, 8.31492, -3.44415)
-
-[node name="Shine" type="Polygon2D" parent="." unique_id=963810361]
-color = Color(1, 0.96, 0.65, 0.9)
-polygon = PackedVector2Array(-6, -8, -1, -10, -4, -4)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104854767]
 shape = SubResource("CircleShape2D_coin")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1238043230]
+position = Vector2(0, -0.49999875)
+scale = Vector2(0.5, 0.45312503)
+texture = ExtResource("1_rwqht")
