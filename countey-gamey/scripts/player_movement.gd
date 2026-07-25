@@ -9,10 +9,12 @@ var can_float := false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	if floating:
-			velocity += get_gravity() * delta * 0.2
+	if is_on_wall_only() and velocity.y > 0: #sliding slower
+			velocity += get_gravity() * delta * 0.4
+	elif floating:
+		velocity += get_gravity() * delta * 0.2 #floating slower
 	else:
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta #normal gravity
 		
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
