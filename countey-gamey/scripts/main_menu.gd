@@ -4,7 +4,7 @@ var _starting := false
 
 
 func _ready() -> void:
-	$Background/Center/Menu/Play.grab_focus()
+	$Background/Play.grab_focus()
 
 
 func _input(event: InputEvent) -> void:

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5inbo2mo048c"]
 
 [ext_resource type="Script" uid="uid://b8rdvrsal57uj" path="res://scripts/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://dkcn7mwu7sscm" path="res://assets/Backgorunds/MainMenu.png" id="2_bqqt6"]
 [ext_resource type="AudioStream" uid="uid://dxxfwhxnkjtel" path="res://assets/sfx/Level_Music.mp3" id="2_ekxnf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_background"]
@@ -24,37 +25,94 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBox_background")
 
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1017460071]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 647.0
+texture = ExtResource("2_bqqt6")
+
 [node name="Center" type="CenterContainer" parent="Background" unique_id=88765324]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="VBoxContainer" parent="Background/Center" unique_id=506014497]
-layout_mode = 2
+[node name="Menu" type="VBoxContainer" parent="Background" unique_id=506014497]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 1065.0
+offset_bottom = 326.0
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Title" type="Label" parent="Background/Center/Menu" unique_id=325539984]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.82, 0.7, 0.95, 1)
-theme_override_font_sizes/font_size = 64
-text = "DEVIL IN THE DIGITS"
+[node name="Credits" type="Label" parent="Background" unique_id=296050694]
+layout_mode = 0
+offset_left = -53.0
+offset_top = 512.0
+offset_right = 362.0
+offset_bottom = 553.0
+theme_override_colors/font_color = Color(0.75, 0.7, 0.82, 1)
+theme_override_font_sizes/font_size = 32
+text = "Made by Freddy & Calum"
 horizontal_alignment = 1
 
-[node name="Play" type="Button" parent="Background/Center/Menu" unique_id=444562394]
+[node name="Others" type="Label" parent="Background/Credits" unique_id=784525805]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 52.0
+offset_right = 423.0
+offset_bottom = 121.0
+text = "Freddy's Brother: Music (Thank you!)
+sound effects via jsfxr
+Portal Sound Effect by freesound_community from Pixabay"
+
+[node name="ControlTitle" type="Label" parent="Background" unique_id=1959014034]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 305.0
+offset_right = 104.0
+offset_bottom = 336.0
+theme_override_colors/font_color = Color(0.54901963, 0.8901961, 0.99607843, 1)
+theme_override_font_sizes/font_size = 24
+text = "Controls"
+
+[node name="Controls" type="Label" parent="Background/ControlTitle" unique_id=1615344135]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 305.0
+offset_bottom = 166.0
+theme_override_font_sizes/font_size = 16
+text = "WASD / left joystick - move
+Mouse Click + Drag / right joystick - rotate digit
+space / abxy - jump
+hold space / abxy - float down (glide whoa)
+any button - progress menus & cutscenes"
+
+[node name="Play" type="Button" parent="Background" unique_id=444562394]
 custom_minimum_size = Vector2(320, 64)
-layout_mode = 2
+layout_mode = 0
+offset_left = 79.0
+offset_top = 180.0
+offset_right = 570.0
+offset_bottom = 256.0
 theme_override_font_sizes/font_size = 28
 text = "PLAY"
 
-[node name="Credits" type="Label" parent="Background/Center/Menu" unique_id=296050694]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.75, 0.7, 0.82, 1)
-theme_override_font_sizes/font_size = 20
-text = "Made by Freddy & Calum"
+[node name="Title" type="Label" parent="Background" unique_id=325539984]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 20.0
+offset_right = 639.0
+offset_bottom = 126.0
+theme_override_colors/font_color = Color(0.82, 0.7, 0.95, 1)
+theme_override_font_sizes/font_size = 64
+text = "DEVIL IN THE DIGITS"
 horizontal_alignment = 1
 
 [node name="music" type="AudioStreamPlayer2D" parent="." unique_id=1134051834]
@@ -62,4 +120,4 @@ stream = ExtResource("2_ekxnf")
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="Background/Center/Menu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Background/Play" to="." method="_on_play_pressed"]
