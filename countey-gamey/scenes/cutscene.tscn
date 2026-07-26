@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://criaxy6dm3fo0"]
 
 [ext_resource type="Script" uid="uid://d2m16pj8it3yd" path="res://scripts/cutscene.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://cl041asom4ghy" path="res://assets/Backgorunds/Background.png" id="2_a320b"]
+[ext_resource type="Texture2D" uid="uid://7hw24o5gkfb7" path="res://assets/Backgorunds/BackgroundV2.png" id="2_0sipp"]
 [ext_resource type="AudioStream" uid="uid://dxxfwhxnkjtel" path="res://assets/sfx/Level_Music.mp3" id="3_0sipp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_text_box"]
@@ -34,7 +34,7 @@ mouse_filter = 1
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
-texture = ExtResource("2_a320b")
+texture = ExtResource("2_0sipp")
 
 [node name="Dim" type="ColorRect" parent="Screen" unique_id=220739725]
 layout_mode = 1
