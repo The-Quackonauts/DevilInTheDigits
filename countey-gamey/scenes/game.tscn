@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dx1rtju5xgkl0" path="res://assets/sfx/Pickup1.wav" id="7_u5sy4"]
 [ext_resource type="PackedScene" path="res://scenes/time_vortex.tscn" id="8_vortex"]
 [ext_resource type="AudioStream" uid="uid://ck7evutyq6quk" path="res://assets/sfx/Story_section_Music.mp3" id="9_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://b1a3gk8fhnu1n" path="res://assets/sfx/freesound_community-portal_idle-34022.mp3" id="9_vtaks"]
 
 [sub_resource type="FontVariation" id="FontVariation_n5368"]
 
@@ -16,7 +17,6 @@
 
 [node name="Game" type="Node2D" unique_id=217747827]
 script = ExtResource("1_yqjtg")
-seconds_per_digit = null
 
 [node name="TimeVortex" parent="." unique_id=644419478 instance=ExtResource("8_vortex")]
 
@@ -81,6 +81,11 @@ volume_db = 10.0
 pitch_scale = 1.75
 max_distance = 1000.0
 attenuation = 3.2490141
+bus = &"SFX"
+
+[node name="PortalNoise" type="AudioStreamPlayer2D" parent="." unique_id=1631184780]
+stream = ExtResource("9_vtaks")
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="music" type="AudioStreamPlayer2D" parent="." unique_id=1264087818]

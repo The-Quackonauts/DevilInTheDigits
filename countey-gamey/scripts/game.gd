@@ -14,6 +14,7 @@ var seconds_per_digit: float = 6.7
 @onready var countdown_label: Label = $CountdownLabel
 @onready var pickup_sound: AudioStreamPlayer2D = $PickupSound
 @onready var time_vortex = $TimeVortex
+@onready var portal_noise: AudioStreamPlayer2D = $PortalNoise
 
 var coins_collected := 0
 var total_coins := 0
@@ -50,6 +51,7 @@ func _collect_coin(_body: Node2D, coin: Area2D) -> void:
 		await charge_finished
 		await time_vortex.charge_to(100.0, FINAL_CHARGE_SECONDS)
 		var portal := PORTAL_SCENE.instantiate() as Area2D
+		portal_noise.play()
 		portal.position = PORTAL_POSITION
 		portal.body_entered.connect(_enter_portal)
 		add_child.call_deferred(portal)

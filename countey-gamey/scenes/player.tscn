@@ -130,7 +130,7 @@ frame_progress = 0.8241006
 
 [node name="JumpNoise" type="AudioStreamPlayer2D" parent="." unique_id=2035607178]
 stream = ExtResource("5_qlg0r")
-volume_db = -10.0
+volume_db = -20.0
 max_distance = 1000.0
 attenuation = 0.9659363
 bus = &"SFX"
