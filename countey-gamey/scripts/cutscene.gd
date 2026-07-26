@@ -8,6 +8,7 @@ signal finished
 @export_range(0.0, 1.0, 0.05) var fade_seconds := 0.2
 @export_range(0.0, 2.0, 0.05) var input_delay_seconds := 0.5
 
+@onready var background: TextureRect = $Screen/Background
 @onready var portraits: Array[TextureRect] = [$Screen/LeftPortrait, $Screen/RightPortrait]
 @onready var heading_label: Label = $Screen/Heading
 @onready var speaker_label: Label = $Screen/TextBox/Speaker
@@ -85,6 +86,8 @@ func _next_line() -> void:
 	if line.has("heading"):
 		heading_label.text = line["heading"]
 		heading_label.show()
+	if line.has("background"):
+		background.texture = line["background"]
 	var solo: bool = line.get("solo", false)
 	for side in 2:
 		portraits[side].visible = not solo or side == speaker

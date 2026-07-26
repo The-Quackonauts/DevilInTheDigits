@@ -1,10 +1,13 @@
 extends Node
 
+const GNOME_BACKGROUND := preload("res://assets/Backgorunds/GnomeEndBackground.png")
+const CEMETERY_BACKGROUND := preload("res://assets/Backgorunds/BackgroundV2.png")
 const LINES := [
 	{
 		"speaker": 0,
 		"emotion": "defeated",
 		"heading": "THE STONE AGE — 2,500,000 BC",
+		"background": GNOME_BACKGROUND,
 		"solo": true,
 		"text": "aww darn it. he sent me to the stone age instead of him. im so cooked",
 	},
@@ -18,6 +21,7 @@ const LINES := [
 		"speaker": 1,
 		"emotion": "sad",
 		"heading": "THE CEMETERY — 2026",
+		"background": CEMETERY_BACKGROUND,
 		"solo": true,
 		"text": "the devil is gone. but youre also still gone",
 	},
@@ -29,7 +33,7 @@ const LINES := [
 	},
 	{
 		"speaker": 1,
-		"emotion": "sad",
+		"emotion": "weeping",
 		"solo": true,
 		"text": "quack",
 	},

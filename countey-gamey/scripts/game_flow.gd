@@ -28,6 +28,7 @@ const CAST := [
 			"thinking": preload("uid://7m7lh3biuyh7"),
 			"whispering": preload("uid://batbynouyyf84"),
 			"triumphant": preload("uid://bdb8o6u55gjua"),
+			"weeping": preload("res://assets/Duck/Duck_Weeping.png")
 		},
 	},
 ]
