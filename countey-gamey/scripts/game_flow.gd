@@ -34,6 +34,42 @@ const CAST := [
 
 var state := State.MAIN_MENU
 var _transition_pending := false
+var _gameplay_elapsed_seconds := 0.0
+var _gameplay_started_at_msec := 0
+var _gameplay_timer_running := false
+
+
+func reset_gameplay_timer() -> void:
+	_gameplay_elapsed_seconds = 0.0
+	_gameplay_started_at_msec = 0
+	_gameplay_timer_running = false
+
+
+func start_gameplay_timer() -> void:
+	if _gameplay_timer_running:
+		return
+	_gameplay_started_at_msec = Time.get_ticks_msec()
+	_gameplay_timer_running = true
+
+
+func get_gameplay_time() -> float:
+	if _gameplay_timer_running:
+		return _gameplay_elapsed_seconds + (
+			Time.get_ticks_msec() - _gameplay_started_at_msec
+		) / 1000.0
+	return _gameplay_elapsed_seconds
+
+
+func finish_gameplay_timer() -> void:
+	_gameplay_elapsed_seconds = get_gameplay_time()
+	_gameplay_timer_running = false
+
+
+func format_gameplay_time(seconds: float) -> String:
+	var tenths := floori(seconds * 10.0)
+	var minutes := int(tenths / 600)
+	var remaining_seconds := int(tenths / 10) % 60
+	return "%02d:%02d.%d" % [minutes, remaining_seconds, tenths % 10]
 
 
 func go_to(next_state: State) -> void:

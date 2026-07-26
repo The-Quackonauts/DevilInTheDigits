@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" path="res://scenes/time_vortex.tscn" id="8_vortex"]
 [ext_resource type="AudioStream" uid="uid://ck7evutyq6quk" path="res://assets/sfx/Story_section_Music.mp3" id="9_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://b1a3gk8fhnu1n" path="res://assets/sfx/freesound_community-portal_idle-34022.mp3" id="9_vtaks"]
-
-[sub_resource type="FontVariation" id="FontVariation_n5368"]
+[ext_resource type="PackedScene" path="res://scenes/gameplay_timer.tscn" id="10_timer_hud"]
+[ext_resource type="Theme" path="res://assets/hud_label_theme.tres" id="11_hud_theme"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_15ldo"]
 
@@ -62,10 +62,12 @@ position = Vector2(569, 213)
 [node name="CountdownLabel" type="Label" parent="." unique_id=1039629955]
 offset_left = 20.0
 offset_top = 606.0
-offset_right = 95.0
-offset_bottom = 629.0
-theme_override_fonts/font = SubResource("FontVariation_n5368")
-text = "Loading..."
+offset_right = 430.0
+offset_bottom = 642.0
+theme = ExtResource("11_hud_theme")
+text = "GET READY..."
+
+[node name="GameplayTimer" parent="." instance=ExtResource("10_timer_hud")]
 
 [node name="KillZone" type="Area2D" parent="." unique_id=259733750]
 position = Vector2(521, 6410)

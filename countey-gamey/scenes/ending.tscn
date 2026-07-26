@@ -19,18 +19,46 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBox_end")
 
-[node name="Title" type="Label" parent="EndCard/Background" unique_id=554081860]
+[node name="Center" type="CenterContainer" parent="EndCard/Background" unique_id=269063663]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Results" type="VBoxContainer" parent="EndCard/Background/Center" unique_id=384130427]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Title" type="Label" parent="EndCard/Background/Center/Results" unique_id=554081860]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.7, 0.95, 1)
 theme_override_font_sizes/font_size = 72
 text = "THE END"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="TimeCaption" type="Label" parent="EndCard/Background/Center/Results" unique_id=1487022822]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.7, 0.82, 1)
+theme_override_font_sizes/font_size = 24
+text = "YOUR TIME"
+horizontal_alignment = 1
+
+[node name="CompletionTime" type="Label" parent="EndCard/Background/Center/Results" unique_id=89311340]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.35, 1)
+theme_override_font_sizes/font_size = 48
+text = "00:00.0"
+horizontal_alignment = 1
+
+[node name="SharePrompt" type="Label" parent="EndCard/Background/Center/Results" unique_id=206817253]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.7, 0.95, 1)
+theme_override_font_sizes/font_size = 24
+text = "Share your time in the comments!"
+horizontal_alignment = 1
 
 [node name="BackToMainMenu" type="Button" parent="EndCard/Background" unique_id=2064052584]
 custom_minimum_size = Vector2(280, 64)

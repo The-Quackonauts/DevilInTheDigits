@@ -24,6 +24,10 @@ GameFlow="*res://scripts/game_flow.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom_font="res://assets/fonts/Staatliches-Regular.ttf"
+
 [input]
 
 move_left={

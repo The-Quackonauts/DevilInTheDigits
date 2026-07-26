@@ -32,14 +32,15 @@ func _ready() -> void:
 	digit_timer.wait_time = seconds_per_digit
 	digit_timer.one_shot = false
 	digit_timer.timeout.connect(_on_digit_timer_timeout)
-	countdown_label.text = "Get ready..."
+	countdown_label.text = "GET READY..."
 	await _play_opening()
+	GameFlow.start_gameplay_timer()
 	digit_timer.start()
 
 
 func _process(_delta: float) -> void:
 	if not digit_timer.is_stopped():
-		countdown_label.text = "Next number in: %.1f" % digit_timer.time_left
+		countdown_label.text = "NEXT NUMBER  //  %.1fs" % digit_timer.time_left
 
 
 func _play_opening() -> void:
@@ -96,4 +97,5 @@ func _collect_coin(_body: Node2D, coin: Area2D) -> void:
 
 
 func _enter_portal(_body: Node2D) -> void:
+	GameFlow.finish_gameplay_timer()
 	GameFlow.go_to(GameFlow.State.ENDING)

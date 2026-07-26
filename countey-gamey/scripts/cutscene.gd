@@ -9,6 +9,7 @@ signal finished
 @export_range(0.0, 2.0, 0.05) var input_delay_seconds := 0.5
 
 @onready var portraits: Array[TextureRect] = [$Screen/LeftPortrait, $Screen/RightPortrait]
+@onready var heading_label: Label = $Screen/Heading
 @onready var speaker_label: Label = $Screen/TextBox/Speaker
 @onready var dialogue_label: RichTextLabel = $Screen/TextBox/Dialogue
 @onready var continue_label: Label = $Screen/TextBox/Continue
@@ -38,8 +39,10 @@ func play(lines: Array, cast: Array) -> void:
 	_was_paused = get_tree().paused
 	get_tree().paused = true
 	show()
+	heading_label.hide()
 
 	for side in 2:
+		portraits[side].show()
 		portraits[side].texture = _portrait(side, "neutral")
 		portraits[side].modulate = Color.WHITE if side == 0 else _inactive_color()
 
@@ -78,6 +81,13 @@ func _next_line() -> void:
 	var speaker: int = line["speaker"]
 	assert(speaker == 0 or speaker == 1)
 	assert(line.has("text"))
+
+	if line.has("heading"):
+		heading_label.text = line["heading"]
+		heading_label.show()
+	var solo: bool = line.get("solo", false)
+	for side in 2:
+		portraits[side].visible = not solo or side == speaker
 
 	speaker_label.text = _cast[speaker]["name"]
 	dialogue_label.text = line["text"]

@@ -17,4 +17,5 @@ func _on_play_pressed() -> void:
 	if _starting:
 		return
 	_starting = true
+	GameFlow.reset_gameplay_timer()
 	GameFlow.go_to(GameFlow.State.INTRO)

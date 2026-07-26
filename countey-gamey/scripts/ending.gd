@@ -4,33 +4,50 @@ const LINES := [
 	{
 		"speaker": 0,
 		"emotion": "defeated",
-		"text": "aww darn it, he got me im so cooked",
+		"heading": "THE STONE AGE — 2,500,000 BC",
+		"solo": true,
+		"text": "aww darn it. he sent me to the stone age instead of him. im so cooked",
+	},
+	{
+		"speaker": 0,
+		"emotion": "smug",
+		"solo": true,
+		"text": "fine. new plan: become king of the cavemen",
 	},
 	{
 		"speaker": 1,
-		"emotion": "triumphant",
-		"text": "hahaha sending me",
+		"emotion": "sad",
+		"heading": "THE CEMETERY — 2026",
+		"solo": true,
+		"text": "the devil is gone. but youre also still gone",
 	},
 	{
 		"speaker": 1,
-		"emotion": "thinking",
-		"text": "also im a duck my brains the size of a walnut why did i get what he was doing and everybody in fiction keeps ducking this up. lock in lads",
+		"emotion": "sad",
+		"solo": true,
+		"text": "i miss you",
 	},
 	{
 		"speaker": 1,
-		"emotion": "neutral",
+		"emotion": "sad",
+		"solo": true,
 		"text": "quack",
 	},
 ]
 
 @onready var cutscene: Cutscene = $Cutscene
 @onready var main_menu_button: Button = $EndCard/Background/BackToMainMenu
+@onready var completion_time_label: Label = \
+	$EndCard/Background/Center/Results/CompletionTime
 
 var _can_leave := false
 var _leaving := false
 
 
 func _ready() -> void:
+	completion_time_label.text = GameFlow.format_gameplay_time(
+		GameFlow.get_gameplay_time()
+	)
 	cutscene.play(LINES, GameFlow.CAST)
 	await cutscene.finished
 	_can_leave = true
