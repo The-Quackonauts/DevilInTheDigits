@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cps8blo54se7n"]
+[gd_scene load_steps=3 format=3 uid="uid://cps8blo54se7n"]
+
+[ext_resource type="Texture2D" path="res://assets/segments/segment_on.png" id="1_on"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hlw8a"]
 radius = 18.0
@@ -7,41 +9,12 @@ height = 202.0
 [node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=1452414413]
 sync_to_physics = false
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1988811655]
-visible = false
-offset_left = -90.0
-offset_top = -18.0
-offset_right = 90.0
-offset_bottom = 18.0
-color = Color(1, 0, 0, 1)
+[node name="Visual" type="Sprite2D" parent="."]
+texture_filter = 2
+texture = ExtResource("1_on")
+scale = Vector2(0.33333334, 0.33333334)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=292921369]
 position = Vector2(-1, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_hlw8a")
-
-[node name="ColorRect3" type="ColorRect" parent="." unique_id=1319263625]
-offset_left = 83.000015
-offset_top = -18.0
-offset_right = 119.000015
-offset_bottom = 18.0
-rotation = 0.7853982
-scale = Vector2(0.71, 0.71)
-color = Color(1, 0, 0, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="." unique_id=406829765]
-offset_left = -85.0
-offset_top = -18.0
-offset_right = -49.0
-offset_bottom = 18.0
-rotation = 0.7853982
-scale = Vector2(0.71, 0.71)
-color = Color(1, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=341678289]
-offset_left = -85.0
-offset_top = -18.0
-offset_right = 105.649994
-offset_bottom = 18.0
-scale = Vector2(0.88000053, 1)
-color = Color(1, 0, 0, 1)

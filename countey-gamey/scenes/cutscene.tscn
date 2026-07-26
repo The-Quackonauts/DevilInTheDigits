@@ -46,6 +46,19 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.015, 0.01, 0.03, 0.88)
 
+[node name="Heading" type="Label" parent="Screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 18.0
+offset_bottom = 62.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.35, 1)
+theme_override_font_sizes/font_size = 30
+text = "PLACE — YEAR"
+horizontal_alignment = 1
+
 [node name="LeftPortrait" type="TextureRect" parent="Screen" unique_id=1989522041]
 layout_mode = 1
 anchors_preset = -1

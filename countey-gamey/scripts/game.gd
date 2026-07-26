@@ -2,6 +2,9 @@ extends Node2D
 
 const PORTAL_SCENE := preload("res://scenes/portal.tscn")
 const PORTAL_POSITION := Vector2(720, 112)
+const PORTAL_FADE_SECONDS := 0.4
+const PLAYER_DROP_DISTANCE := 70.0
+const PLAYER_DROP_SECONDS := 0.45
 const COIN_CHARGE_MAX := 66.0
 const FINAL_CHARGE_SECONDS := 5.0
 
@@ -15,6 +18,7 @@ var seconds_per_digit: float = 6.7
 @onready var pickup_sound: AudioStreamPlayer2D = $PickupSound
 @onready var time_vortex = $TimeVortex
 @onready var portal_noise: AudioStreamPlayer2D = $PortalNoise
+@onready var player: CharacterBody2D = $Player
 
 var coins_collected := 0
 var total_coins := 0
@@ -28,11 +32,40 @@ func _ready() -> void:
 	digit_timer.wait_time = seconds_per_digit
 	digit_timer.one_shot = false
 	digit_timer.timeout.connect(_on_digit_timer_timeout)
+	countdown_label.text = "GET READY..."
+	await _play_opening()
+	GameFlow.start_gameplay_timer()
 	digit_timer.start()
 
 
 func _process(_delta: float) -> void:
-	countdown_label.text = "Next number in: %.1f" % digit_timer.time_left
+	if not digit_timer.is_stopped():
+		countdown_label.text = "NEXT NUMBER  //  %.1fs" % digit_timer.time_left
+
+
+func _play_opening() -> void:
+	var portal := PORTAL_SCENE.instantiate() as Area2D
+	portal.position = player.position + Vector2.UP * 28.0
+	add_child(portal)
+	portal_noise.play()
+
+	_8.process_mode = Node.PROCESS_MODE_DISABLED
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	player.velocity = Vector2.ZERO
+	await get_tree().create_timer(PORTAL_FADE_SECONDS).timeout
+
+	var drop := create_tween()
+	drop.tween_property(
+		player, "position:y", player.position.y + PLAYER_DROP_DISTANCE, PLAYER_DROP_SECONDS
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await drop.finished
+
+	var fade := create_tween()
+	fade.tween_property(portal, "modulate:a", 0.0, PORTAL_FADE_SECONDS)
+	await fade.finished
+	portal.queue_free()
+	player.process_mode = Node.PROCESS_MODE_INHERIT
+	_8.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _on_digit_timer_timeout() -> void:
@@ -51,11 +84,18 @@ func _collect_coin(_body: Node2D, coin: Area2D) -> void:
 		await charge_finished
 		await time_vortex.charge_to(100.0, FINAL_CHARGE_SECONDS)
 		var portal := PORTAL_SCENE.instantiate() as Area2D
-		portal_noise.play()
 		portal.position = PORTAL_POSITION
 		portal.body_entered.connect(_enter_portal)
-		add_child.call_deferred(portal)
+		portal.monitoring = false
+		portal.modulate.a = 0.0
+		add_child(portal)
+		portal_noise.play()
+		var fade := create_tween()
+		fade.tween_property(portal, "modulate:a", 1.0, PORTAL_FADE_SECONDS)
+		await fade.finished
+		portal.monitoring = true
 
 
 func _enter_portal(_body: Node2D) -> void:
+	GameFlow.finish_gameplay_timer()
 	GameFlow.go_to(GameFlow.State.ENDING)
